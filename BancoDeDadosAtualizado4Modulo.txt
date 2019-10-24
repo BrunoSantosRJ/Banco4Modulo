@@ -1,0 +1,114 @@
+1 - SELECT valor, observacoes FROM `compras` WHERE data >= 15/12/2008
+
+2 - SELECT * FROM `compras` WHERE data >= '2008-12-15' and data < '2010-12-15'
+
+3 - SELECT * FROM `compras` WHERE observacoes like 'lanchonete%' and valor BETWEEN 15 AND 35
+
+4 - SELECT * FROM `compras` WHERE recebido = false
+
+5 - SELECT * FROM `compras` WHERE valor > 5000.00 or recebido = true
+
+6 - update compras SET observacoes = 'datas festivas' WHERE data IN("2010-12-25","2010-06-12")
+
+7 - DELETE FROM compras WHERE DATA BETWEEN "2009-03-05" AND "2009-03-20"
+
+8 - ALTER TABLE COMPRAS MODIFY COLUMN observacoes TEXT NOT NULL
+
+9 - ALTER TABLE compras MODIFY COLUMN RECEBIDO TINYINT(1) DEFAULT '0'
+
+10 - SELECT sum(valor) FROM compras
+
+11 - SELECT count(valor) FROM compras
+
+12 - SELECT CAST(AVG(valor) as decimal(18,2)) media FROM compras / select FORMAT(AVG(valor),2) media FROM compras
+
+13 - SELECT c2.nome, c2.telefone, c1.valor FROM compras c1 INNER JOIN compradores c2 on c1.comprador_id = c2.id >>> PARA JUNTAR VALORES DE DUAS TABELAS
+
+
+14 responda: exiba o nome do comprador e o valor de todas as compras feitas antes de 09/08/2010
+14 - SELECT c2.nome, c1.valor FROM compras c1 INNER JOIN compradores c2 on c1.comprador_id = c2.id WHERE c1.data < '2010-08-09'
+
+15 responda: exiba todas as compras do comprador que possui o ID igual a 1
+15 - select * from compras where comprador_id = 1
+
+16 reponda: exiba todas as compras (sem os dados do comprador) feitas pelo Guilherme
+16 - select c1.* from compras c1 inner join compradores c2 on c1.comprador_id = c2.id where c2.nome like 'GUILHERME'
+
+
+
+sum()
+count()
+avg()
+format()
+year()
+month()
+
+
+ALTER TABLE compras MODIFY COLUMN observacoes text not null
+
+modificar o valor da observações nas datas 
+
+UPDATE compras SET observacoes = 'datas festivas' WHERE data in ('2010-12-25','2010-06-12')
+
+ALTER TABLE compras MODIFY COLUMN recebido tinyint(1) DEFAULT '0'
+
+
+DELETE FROM compras WHERE data BETWEEN '2009-03-05' AND '2009-03-20'
+
+SELECT * FROM `compras` ORDER BY VALOR ASC = Ordenar do menor para o maior 
+
+SELECT * FROM `compras` ORDER BY VALOR desc = Ordenar do maior para o menor 
+
+SELECT * FROM `compras` ORDER BY VALOR, data = ordenar pelo maior do menor, caso haja empate de valor, o desempate sera a data.
+
+ALTER TABLE compras ADD COLUMN forma_pagto ENUM ('CARTAO','BOLETO') = para add um limite,  ex: formas de pagamento só sera de boletou ou cartão. 
+
+SELECT * FROM compras ORDER BY VALOR LIMIT 5 = ordenar e colocar um limite até 5
+
+SELECT * FROM compras ORDER BY VALOR LIMIT 2,5 = ordenar e mostra do dois ate o cinco, desprezando os demais de cima.
+
+UPDATE compras set forma_pagto = 'BOLETO' WHERE id < 23 = do primeiro até o 
+UPDATE compras set forma_pagto = 'CARTAO' WHERE id > 23
+
+SELECT SUM(valor) FROM compras = Somar o valor da compra total 
+
+SELECT COUNT(*) FROM compras = MOSTRA A QUANTIDADE DE COMPRAS FEITAS 
+
+SELECT COUNT(*) FROM compras WHERe MONTH(data)= '01' = Selecionar quantidades de compras em Janeiro
+
+SELECT AVG (valor) FROM compras= somando e achando a media do valor da compra 
+
+SELECT cast(AVG(valor) as decimal (18,2)) media FROM compras;   
+SELECT format(AVG(valor), 2) FROM compras
+                       formas de arredondar os números decimais 
+
+
+SELECT YEAR(DATA) AS ANO , SUM(VALOR) AS TOTAL FROM COMPRAS GROUP BY YEAR(DATA)
+
+SELECT recebido, COUNT(recebido) AS total_recebido, SUM(VALOR) AS soma_gastos FROM compras GROUP BY recebido
+
+ALTER TABLE compras CHANGE forma_pagto forma_pagto
+ENUM ('cartao,' 'boleto', 'dinheiro', 'trasparência')
+
+UPDATE compras SET forma_pagto = 'TRANSFERENCIA' where id >= 30 and id <= 35;
+UPDATE compras SET forma_pagto = 'DINHEIRO' where id >= 10 and id <= 17
+
+
+
+==============================================================
+
+SELECT YEAR(DATA) AS ANO , SUM(VALOR) AS TOTAL FROM COMPRAS GROUP BY YEAR(DATA)
+
+SELECT recebido, COUNT(recebido) AS total_recebido, SUM(VALOR) AS soma_gastos FROM compras GROUP BY recebido
+
+ALTER TABLE compras CHANGE forma_pagto forma_pagto
+ENUM ('cartao,' 'boleto', 'dinheiro', 'trasparência')
+
+UPDATE compras SET forma_pagto = 'TRANSFERENCIA' where id >= 30 and id <= 35;
+UPDATE compras SET forma_pagto = 'DINHEIRO' where id >= 10 and id <= 17
+
+SELECT FORMA_PAGTO, SUM(VALOR) FROM COMPRAS GROUP BY
+
+
+UPDATE compras SET forma_pagto = 'TRANSFERENCIA' where id >= 30 and id <= 35;
+UPDATE compras SET forma_pagto = 'DINHEIRO' where id >= 10 and id <= 17
